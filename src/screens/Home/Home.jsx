@@ -9,7 +9,7 @@ import styles from './Home.style'
 const Home = ({setCategorySelected}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={'Categories'} />
+      <Header title={'Alimentos'} />
       <View style={styles.listContainer}>
         <FlatList
           data={dataCategories}

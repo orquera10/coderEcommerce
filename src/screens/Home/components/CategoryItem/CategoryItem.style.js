@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { colors } from '../../../../constants/colors'
 
 export default styles = StyleSheet.create({
   container: {
@@ -12,7 +13,7 @@ export default styles = StyleSheet.create({
     paddingLeft: 20,
   },
   text: {
-    fontFamily: 'PoppinsLightItalic',
+    fontFamily: 'ABeeZee',
     fontSize: 17,
   },
 })

@@ -35,8 +35,8 @@ const Products = ({ category }) => {
         <FlatList
           data={arrProducts}
           renderItem={({ item }) => (
-            <View>
-              <Text>{item.title}</Text>
+            <View style={styles.cardProduct}>
+              <Text style={styles.textCard}>{item.title}</Text>
             </View>
           )}
           keyExtractor={item => item.id}
