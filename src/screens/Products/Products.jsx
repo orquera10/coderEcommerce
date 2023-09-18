@@ -5,10 +5,10 @@ import React, { useEffect, useState } from 'react'
 import allProducts from '../../data/products'
 import styles from './Products.style'
 
-const Products = ({ navigation, route }) => {
+const Products = ({ category }) => {
   const [arrProducts, setArrProducts] = useState([])
   const [keyword, setKeyword] = useState('')
-  const { category } = route.params
+  
 
   useEffect(() => {
     if (category) {
@@ -35,11 +35,9 @@ const Products = ({ navigation, route }) => {
         <FlatList
           data={arrProducts}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Details', { product: item })}
-            >
+            <View>
               <Text>{item.title}</Text>
-            </TouchableOpacity>
+            </View>
           )}
           keyExtractor={item => item.id}
         />
