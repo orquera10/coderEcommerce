@@ -38,7 +38,9 @@ const Products = ({ navigation, route }) => {
             <TouchableOpacity
               onPress={() => navigation.navigate('Details', { product: item })}
             >
-              <Text>{item.title}</Text>
+              <View style={styles.cardProduct}>
+                <Text style={styles.textCard}>{item.title}</Text>
+              </View>
             </TouchableOpacity>
           )}
           keyExtractor={item => item.id}

@@ -9,10 +9,12 @@ const Details = ({ route }) => {
   return (
     <View style={styles.container}>
       <Header title={'Detalle'} />
-      <Image style={styles.image} source={{ uri: product.images[0] }} />
+      <View style={styles.containerImg}>
+        <Image style={styles.image} source={{ uri: product.thumbnail }} resizeMode='contain'/>
+      </View>
       <Text style={styles.title}>{product.title}</Text>
-      <Text>{product.description}</Text>
-      <Text style={styles.price}>{`$ ${product.price}`}</Text>
+      <Text style={styles.description}>{product.description}</Text>
+      <Text style={styles.price}>{`${product.calorias} calorias`}</Text>
     </View>
   )
 }

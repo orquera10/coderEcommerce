@@ -1,60 +1,17 @@
 export default [
-  { title: 'smartphones' },
-  {
-    title: 'laptops',
-  },
-  {
-    title: 'fragrances',
-  },
-  {
-    title: 'skincare',
-  },
-  {
-    title: 'groceries',
-  },
-  {
-    title: 'home-decoration',
-  },
-  {
-    title: 'furniture',
-  },
-  {
-    title: 'tops',
-  },
-  {
-    title: 'womens-dresses',
-  },
-  {
-    title: 'womens-shoes',
-  },
-  {
-    title: 'mens-shirts',
-  },
-  {
-    title: 'mens-shoes',
-  },
-  {
-    title: 'mens-watches',
-  },
-  {
-    title: 'womens-watches',
-  },
-  {
-    title: 'womens-bags',
-  },
-  {
-    title: 'womens-jewellery',
-  },
-  {
-    title: 'sunglasses',
-  },
-  {
-    title: 'automotive',
-  },
-  {
-    title: 'motorcycle',
-  },
-  {
-    title: 'lighting',
-  },
+  {"title": "Frutas"},
+  {"title": "Verduras"},
+  {"title": "Carnes"},
+  {"title": "Pescados y Mariscos"},
+  {"title": "Productos lácteos"},
+  {"title": "Huevos y Sustitutos"},
+  {"title": "Cereales y Granos"},
+  {"title": "Legumbres y Frutos Secos"},
+  {"title": "Aceites y Grasas"},
+  {"title": "Productos Horneados"},
+  {"title": "Bebidas"},
+  {"title": "Snacks y Dulces"},
+  {"title": "Condimentos y Salsas"},
+  {"title": "Alimentos Procesados"},
+  {"title": "Alimentos para Bebés"}
 ]
