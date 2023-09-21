@@ -3,10 +3,10 @@ import React, { useEffect } from 'react'
 
 import styles from './CategoryItem.style'
 
-const CategoryItem = ({ category, setCategorySelected }) => {
+const CategoryItem = ({ category, navigation }) => {
   return (
     <Pressable
-      onPress={() => setCategorySelected(category)}
+      onPress={() => navigation.navigate('Products', { category })}
       style={styles.container}
     >
       <View style={styles.contentContainer}>

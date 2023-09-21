@@ -6,16 +6,16 @@ import React from 'react'
 import dataCategories from '../../data/dataCategories'
 import styles from './Home.style'
 
-const Home = ({setCategorySelected}) => {
+const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={'Alimentos'} />
+      <Header title={'Categories'} />
       <View style={styles.listContainer}>
         <FlatList
           data={dataCategories}
           keyExtractor={category => category.title}
           renderItem={({ item }) => (
-            <CategoryItem category={item.title} setCategorySelected={setCategorySelected} />
+            <CategoryItem category={item.title} navigation={navigation} />
           )}
         />
       </View>
