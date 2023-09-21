@@ -7,6 +7,6 @@ export default styles = StyleSheet.create({
     fontSize: 70,
     fontFamily: 'DancingScript',
     alignSelf: 'center',
-    color: '#ffffff'
+    color: '#ffffff',
   },
 })

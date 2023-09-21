@@ -35,9 +35,19 @@ const Products = ({ category }) => {
         <FlatList
           data={arrProducts}
           renderItem={({ item }) => (
+<<<<<<< HEAD
             <View style={styles.cardProduct}>
               <Text style={styles.textCard}>{item.title}</Text>
             </View>
+=======
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Details', { product: item })}
+            >
+              <View style={styles.cardProduct}>
+                <Text style={styles.textCard}>{item.title}</Text>
+              </View>
+            </TouchableOpacity>
+>>>>>>> 4taEntrega
           )}
           keyExtractor={item => item.id}
         />
