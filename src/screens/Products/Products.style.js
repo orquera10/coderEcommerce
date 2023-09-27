@@ -11,16 +11,32 @@ export default styles = StyleSheet.create({
     flex: 1,
     marginTop: 15,
   },
-  cardProduct: {
-    backgroundColor: '#FFFFFF',
-    marginVertical: 10,
-    height: 60,
-    borderRadius: 20,
-    justifyContent: 'center',
-    paddingLeft: 20,
+  weapperStyle: {
+    justifyContent: 'space-between',
   },
-  textCard: {
+  productContainer: {
+    width: '47%',
+    backgroundColor: '#FFFFFF',
+    marginBottom: 20,
+    alignItems: 'flex-start',
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    borderRadius: 15,
+    gap: 10,
+  },
+  title: {
     fontFamily: 'ABeeZee',
-    fontSize: 17,
+    fontWeight: '700',
+    fontVariant: 'small-caps',
+  },
+  price: {
+    fontFamily: 'ABeeZee',
+    fontSize: 20,
+    fontVariant: '',
+  },
+  image: {
+    alignSelf: 'center',
+    height: 150,
+    width: 150,
   },
 })

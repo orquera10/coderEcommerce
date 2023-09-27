@@ -1,0 +1,1 @@
+export const baseUrl = 'https://nutricoder-8e15b-default-rtdb.firebaseio.com/'

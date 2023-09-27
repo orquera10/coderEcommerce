@@ -8,6 +8,6 @@ export default styles = StyleSheet.create({
   },
   listContainer: {
     padding: 10,
-    paddingBottom: 170,
+    paddingBottom: 100,
   },
 })
