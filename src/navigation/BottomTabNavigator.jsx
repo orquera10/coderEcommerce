@@ -1,11 +1,11 @@
 import { StyleSheet, View } from 'react-native'
-
 import CartNavigator from './CartNavigator'
 import Feather from '@expo/vector-icons/Feather'
 import OrdersNavigator from './OrdersNavigator'
 import StackNavigator from './StackNavigator'
 import { colors } from '../constants/colors'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import ProfileNavigator from './ProfileNavigator'
 
 const BottomTab = createBottomTabNavigator()
 
@@ -48,6 +48,17 @@ function BottomTabNavigator() {
                     tabBarIcon: ({ focused }) => (
                         <View style={focused ? styles.iconContainer : null}>
                             <Feather name="list" size={24} color={colors.white} />
+                        </View>
+                    ),
+                }}
+            />
+            <BottomTab.Screen
+                name="ProfileNav"
+                component={ProfileNavigator}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <View style={focused ? styles.iconContainer : null}>
+                            <Feather name="user" size={24} color={colors.white} />
                         </View>
                     ),
                 }}
