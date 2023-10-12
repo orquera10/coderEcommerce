@@ -2,15 +2,22 @@ import * as ImagePicker from 'expo-image-picker'
 import { Image, Pressable, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCameraImage } from '../../features/auth/authSlice'
+import { clearUser, setCameraImage } from '../../features/auth/authSlice'
 import styles from './Profile.styles'
 import { usePostProfileImageMutation } from '../../services/shopApi'
+import { deleteSession } from '../../db'
+import { Header } from '../../components'
 
 const Profile = ({ navigation }) => {
     const image = useSelector(state => state.auth.imageCamera)
     const { localId } = useSelector(state => state.auth)
     const [triggerSaveProfileImage, result] = usePostProfileImageMutation()
     const dispatch = useDispatch()
+
+    const logout = () => {
+        dispatch(clearUser())
+        deleteSession()
+    }
 
     const verifyCameraPermissions = async () => {
         const { granted } = await ImagePicker.requestCameraPermissionsAsync()
@@ -47,6 +54,7 @@ const Profile = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <Header title={'Profile'} />
             {image ? (
                 <Image
                     source={{
@@ -64,17 +72,23 @@ const Profile = ({ navigation }) => {
                     resizeMode="cover"
                 />
             )}
-            <Pressable style={styles.cameraButton} onPress={pickImage}>
-                <Text>Tomar Foto de perfil</Text>
-            </Pressable>
-            <Pressable style={styles.cameraButton} onPress={confirmImage}>
-                <Text>Confirmar</Text>
-            </Pressable>
+            <View style={styles.containerFot}>
+                <Pressable style={styles.cameraButton} onPress={pickImage}>
+                    <Text style={styles.text}>Cambiar foto de perfil</Text>
+                </Pressable>
+                <Pressable style={styles.cameraButton} onPress={confirmImage}>
+                    <Text style={styles.text}>Confirmar</Text>
+                </Pressable>
+            </View>
+
             <Pressable
                 style={{ ...styles.cameraButton, marginTop: 20 }}
                 onPress={() => navigation.navigate('Location')}
             >
-                <Text>Ir a mi ubiacion</Text>
+                <Text style={styles.text}>Ir a mi ubiacion</Text>
+            </Pressable>
+            <Pressable style={styles.buttonLogout} onPress={logout}>
+                <Text style={styles.textLogout}>Logout</Text>
             </Pressable>
         </View>
     )

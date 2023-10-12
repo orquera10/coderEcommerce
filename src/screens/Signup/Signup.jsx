@@ -1,4 +1,4 @@
-import { Pressable, Text, TextInput, View } from 'react-native'
+import { Pressable, Text, TextInput, View, Image } from 'react-native'
 import React, { useState } from 'react'
 import { TextInput as Input } from 'react-native-paper'
 import { setUser } from '../../features/auth/authSlice'
@@ -27,33 +27,43 @@ const Signup = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <View >
+                <Image
+                    source={require('../../../src/assets/img/logoDietik.png')} 
+                    style={{ width: 300, height: 200,  }} 
+                    resizeMode='contain'
+                />
+            </View>
             <View style={styles.loginContainer}>
-                <Text>Sing up to start</Text>
+                <Text style={{fontSize: 20}}>Registrate para ingresar</Text>
                 {/*  <Input mode="flat" label="Email" style={styles.email} /> */}
                 <TextInput
                     style={styles.inputEmail}
                     value={email}
                     onChangeText={setEmail}
+                    placeholder="Email"
                 />
                 <TextInput
                     style={styles.inputEmail}
                     value={password}
                     onChangeText={setPassword}
+                    placeholder="Contraseña"
                 />
                 <TextInput
                     style={styles.inputEmail}
                     value={confirmPass}
                     onChangeText={setConfirmPass}
+                    placeholder="Repetir Contraseña"
                 />
                 <Pressable style={styles.loginButton} onPress={onSubmit}>
-                    <Text style={{ color: 'white' }}>Sign up</Text>
+                    <Text style={{ color: 'white', fontSize:20, fontFamily: 'ABeeZee',  }}>Registrate</Text>
                 </Pressable>
-                <Text>Already have an account?</Text>
+                <Text style={{fontSize: 20}}>Ya tienes una cuenta?</Text>
                 <Pressable
                     style={styles.loginButton}
                     onPress={() => navigation.navigate('Login')}
                 >
-                    <Text style={{ color: 'white' }}>Login</Text>
+                    <Text style={{ color: 'white', fontSize:20, fontFamily: 'ABeeZee', }}>inicia Sesión</Text>
                 </Pressable>
             </View>
         </View>

@@ -6,14 +6,21 @@ export default styles = StyleSheet.create({
         margin: 15,
         padding: 8,
         borderRadius: 20,
-        backgroundColor: colors.grey,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: 100
     },
     name: {
-        fontSize: 18,
+        fontSize: 20,
+        marginHorizontal: 20,
+        minWidth: 150
     },
     image: {
-        width: 50,
-        height: 50,
+        width: 70,
+        height: 70,
+        marginStart: 10
     },
     details: {
         flex: 1,
@@ -21,5 +28,6 @@ export default styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'space-between',
+        marginEnd: 10
     },
 })

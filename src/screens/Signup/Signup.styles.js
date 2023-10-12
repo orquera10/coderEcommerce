@@ -16,14 +16,15 @@ export default styles = StyleSheet.create({
     inputEmail: {
         width: '95%',
         backgroundColor: colors.secondary,
-        height: 30,
+        height: 50,
         marginVertical: 15,
         justifyContent: 'center',
         alignItems: 'center',
+        paddingHorizontal: 10
     },
     loginButton: {
         backgroundColor: colors.primary,
-        width: '50%',
+        width: '95%',
         height: 50,
         borderRadius: 10,
         marginBottom: 15,

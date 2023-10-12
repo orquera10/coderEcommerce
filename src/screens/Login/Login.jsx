@@ -1,4 +1,4 @@
-import { Pressable, Text, TextInput, View } from 'react-native'
+import { Pressable, Text, TextInput, View, Image } from 'react-native'
 import React, { useState } from 'react'
 
 import { insertSession } from '../../db'
@@ -34,27 +34,36 @@ const Login = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <View >
+                <Image
+                    source={require('../../../src/assets/img/logoDietik.png')} 
+                    style={{ width: 300, height: 200,  }}  
+                    resizeMode='contain'
+                />
+            </View>
             <View style={styles.loginContainer}>
-                <Text>Login to start</Text>
+                <Text style={{ fontSize: 20 }}>Ingresar</Text>
                 <TextInput
                     style={styles.inputEmail}
                     value={email}
                     onChangeText={setEmail}
+                    placeholder="Email"
                 />
                 <TextInput
                     style={styles.inputEmail}
                     value={password}
                     onChangeText={setPassword}
+                    placeholder="Contraseña"
                 />
                 <Pressable style={styles.loginButton} onPress={onSubmit}>
-                    <Text style={{ color: 'white' }}>Login</Text>
+                    <Text style={{ color: 'white', fontSize: 20, fontFamily: 'ABeeZee', }}>Inicia Sesión</Text>
                 </Pressable>
-                <Text>No have an account?</Text>
+                <Text style={{ fontSize: 20 }}>No tienes una cuenta?</Text>
                 <Pressable
                     style={styles.loginButton}
                     onPress={() => navigation.navigate('Signup')}
                 >
-                    <Text style={{ color: 'white' }}>Sign up</Text>
+                    <Text style={{ color: 'white', fontSize: 20, fontFamily: 'ABeeZee', }}>Registrate</Text>
                 </Pressable>
             </View>
         </View>

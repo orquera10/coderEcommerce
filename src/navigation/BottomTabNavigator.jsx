@@ -1,6 +1,9 @@
 import { StyleSheet, View } from 'react-native'
 import CartNavigator from './CartNavigator'
 import Feather from '@expo/vector-icons/Feather'
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import OrdersNavigator from './OrdersNavigator'
 import StackNavigator from './StackNavigator'
 import { colors } from '../constants/colors'
@@ -25,7 +28,8 @@ function BottomTabNavigator() {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={focused ? styles.iconContainer : null}>
-                            <Feather name="shopping-bag" size={24} color={colors.white} />
+                            <MaterialCommunityIcons name="food-apple" size={24} color={colors.white} />
+                            {/* <Feather name="shopping-bag" size={24} color={colors.white} /> */}
                         </View>
                     ),
                 }}
@@ -36,7 +40,8 @@ function BottomTabNavigator() {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={focused ? styles.iconContainer : null}>
-                            <Feather name="shopping-cart" size={24} color={colors.white} />
+                            <MaterialCommunityIcons name="food-variant" size={25} color="black" />
+                            {/* <Feather name="shopping-cart" size={24} color={colors.white} /> */}
                         </View>
                     ),
                 }}
@@ -47,7 +52,8 @@ function BottomTabNavigator() {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={focused ? styles.iconContainer : null}>
-                            <Feather name="list" size={24} color={colors.white} />
+                            <FontAwesome5 name="tasks" size={24} color="black" />
+                            {/* <Feather name="list" size={24} color={colors.white} /> */}
                         </View>
                     ),
                 }}
@@ -58,7 +64,8 @@ function BottomTabNavigator() {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={focused ? styles.iconContainer : null}>
-                            <Feather name="user" size={24} color={colors.white} />
+                            <FontAwesome5 name="user-alt" size={24} color="black" />
+                            {/* <Feather name="user" size={24} color={colors.white} /> */}
                         </View>
                     ),
                 }}
