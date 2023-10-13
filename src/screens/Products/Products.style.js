@@ -16,7 +16,7 @@ export default styles = StyleSheet.create({
   },
   productContainer: {
     width: '47%',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'white',
     marginBottom: 20,
     alignItems: 'flex-start',
     paddingVertical: 15,

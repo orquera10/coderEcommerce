@@ -10,11 +10,11 @@ export default styles = StyleSheet.create({
     padding: 15,
   },
   input: {
-    backgroundColor: colors.quaternary,
+    backgroundColor: colors.secondary,
     borderRadius: 8,
     padding: 10,
     borderWidth: 1,
-    borderColor: colors.quaternary,
+    borderColor: colors.secondary,
     width: '80%',
     fontSize: 20,
   },

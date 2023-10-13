@@ -22,7 +22,7 @@ const SearchInput = ({ onSearch }) => {
         style={styles.input}
         value={value}
         onChangeText={setValue}
-        placeholder="Search product"
+        placeholder="Buscar comida"
       />
       <Pressable onPress={search}>
         <AntDesign name="search1" size={25} color={'black'} />

@@ -9,18 +9,17 @@ const Products = ({ navigation }) => {
   const category = useSelector(state => state.shop.categorySelected)
   const [keyword, setKeyword] = useState('')
   const { data, isLoading } = useGetProductsByCategoryQuery(category)
+  const [productsFiltered, setProductsFiltered] = useState([]);
 
   useEffect(() => {
     
     if (data) {
-      
-      const productsFiltered = Object.values(data).filter(product =>
+      const filtered = Object.values(data).filter(product =>
         product.title.includes(keyword)
       )
-      console.log(productsFiltered);
-    
+      setProductsFiltered(filtered);
     }
-  }, [keyword])
+  }, [data, keyword])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,7 +28,7 @@ const Products = ({ navigation }) => {
       <View style={styles.listContainer}>
         {!isLoading && (
           <FlatList
-            data={Object.values(data)}
+            data={productsFiltered}
             numColumns={2}
             columnWrapperStyle={styles.weapperStyle}
             renderItem={({ item }) => (
@@ -42,6 +41,7 @@ const Products = ({ navigation }) => {
                   source={{
                     uri: item.thumbnail,
                   }}
+                  resizeMode='contain'
                 />
                 <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.price}>{`cal ${item.calorias.toFixed(2)}`}</Text>
