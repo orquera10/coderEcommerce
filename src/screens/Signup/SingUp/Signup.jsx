@@ -1,13 +1,13 @@
 import { Pressable, Text, TextInput, View, Image } from 'react-native'
 import React, { useState } from 'react'
 import { TextInput as Input } from 'react-native-paper'
-import { setUser, setProfileData } from '../../features/auth/authSlice'
+import { setUser, setProfileData } from '../../../features/auth/authSlice'
 import styles from './Signup.styles'
 import { useDispatch } from 'react-redux'
-import { useSignUpMutation } from '../../services/authApi'
-import { insertSession } from '../../db'
-import { usePostProfileDataMutation } from '../../services/shopApi'
-import { ModalError } from '../../components'
+import { useSignUpMutation } from '../../../services/authApi'
+import { insertSession } from '../../../db'
+import { usePostProfileDataMutation } from '../../../services/shopApi'
+import { ModalError } from '../../../components'
 
 const Signup = ({ navigation }) => {
     const [email, setEmail] = useState('')
@@ -52,7 +52,7 @@ const Signup = ({ navigation }) => {
                     .then(result => console.log(result))
             })
             .catch(err => {
-                setErrorSingup(err.data.error.message) 
+                setErrorSingup(err.data.error.message)
                 console.log(errorSingup);
                 setModalVisible(true)
             })
@@ -62,40 +62,50 @@ const Signup = ({ navigation }) => {
         // }
     }
     const onHandleDelete = () => {
-        
+
         setModalVisible(false)
     }
     return (
         <View style={styles.container}>
-            <View >
+            <View style={styles.containerArriba}>
                 <Image
-                    source={require('../../../src/assets/img/logoDietik.png')}
-                    style={{ width: 300, height: 200, }}
+                    source={require('../../../assets/img/logoDietikClaro.png')}
+                    style={{ height: 50, margin: 3 }}
                     resizeMode='contain'
                 />
             </View>
+
             <View style={styles.loginContainer}>
-                <Text style={{ fontSize: 20 }}>Registrate para ingresar</Text>
-                {/*  <Input mode="flat" label="Email" style={styles.email} /> */}
-                <TextInput
-                    style={styles.inputEmail}
-                    value={email}
-                    onChangeText={setEmail}
-                    placeholder="Email"
+                <Image
+                    source={require('../../../assets/img/fondoAuth.png')}
+                    style={{ position: 'absolute', height: '100%', opacity: 0.1 }}
                 />
-                <TextInput
-                    style={styles.inputEmail}
-                    value={password}
-                    onChangeText={setPassword}
-                    placeholder="Contraseña"
-                />
-                <TextInput
-                    style={styles.inputEmail}
-                    value={confirmPass}
-                    onChangeText={setConfirmPass}
-                    placeholder="Repetir Contraseña"
-                />
-                <TextInput
+
+                <View style={styles.containerInputs}>
+
+                    {/*  <Input mode="flat" label="Email" style={styles.email} /> */}
+                    <TextInput
+                        style={styles.input}
+                        value={email}
+                        onChangeText={setEmail}
+                        placeholder="Email"
+                        placeholderTextColor="#E3E9E2"
+                    />
+                    <TextInput
+                        style={styles.input}
+                        value={password}
+                        onChangeText={setPassword}
+                        placeholder="Contraseña"
+                        placeholderTextColor="#E3E9E2"
+                    />
+                    <TextInput
+                        style={styles.input}
+                        value={confirmPass}
+                        onChangeText={setConfirmPass}
+                        placeholder="Repetir Contraseña"
+                        placeholderTextColor="#E3E9E2"
+                    />
+                    {/* <TextInput
                     style={styles.inputEmail}
                     value={nombre}
                     onChangeText={setNombre}
@@ -106,17 +116,25 @@ const Signup = ({ navigation }) => {
                     value={pais}
                     onChangeText={setPais}
                     placeholder="De que país sos?"
-                />
-                <Pressable style={styles.loginButton} onPress={onSubmit}>
-                    <Text style={{ color: 'white', fontSize: 20, fontFamily: 'ABeeZee', }}>Registrate</Text>
-                </Pressable>
-                <Text style={{ fontSize: 20 }}>Ya tienes una cuenta?</Text>
-                <Pressable
-                    style={styles.loginButton}
-                    onPress={() => navigation.navigate('Login')}
-                >
-                    <Text style={{ color: 'white', fontSize: 20, fontFamily: 'ABeeZee', }}>inicia Sesión</Text>
-                </Pressable>
+                /> */}
+                    <Pressable style={styles.loginButton}
+                        // onPress={onSubmit}
+                        onPress={() => navigation.navigate('SingUpData')}
+                    >
+                        <Text style={styles.text}>Continuar</Text>
+                    </Pressable>
+                    <View style={styles.register}>
+                        <Text style={styles.textRegister}>Ya tienes una cuenta? </Text>
+                        <Pressable
+
+                            onPress={() => navigation.navigate('Login')}
+                        >
+                            <Text style={[styles.textRegister, { fontWeight: 'bold', }]}>Inicia Sesión</Text>
+                        </Pressable>
+                    </View>
+
+                </View>
+
             </View>
             <ModalError modalVisible={modalVisible} onHandleDelete={onHandleDelete} setModalVisible={setModalVisible} errorSingUp={errorSingup} />
         </View>

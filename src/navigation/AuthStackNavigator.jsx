@@ -1,4 +1,4 @@
-import { Login, Signup } from '../screens'
+import { Login, Signup, SingUpData, SingUpPrivacidad } from '../screens'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 const AuthStack = createNativeStackNavigator()
@@ -11,6 +11,8 @@ function AuthStackNavigator() {
         }}>
             <AuthStack.Screen name="Login" component={Login} />
             <AuthStack.Screen name="Signup" component={Signup} />
+            <AuthStack.Screen name="SingUpData" component={SingUpData} />
+            <AuthStack.Screen name="SingUpPrivacidad" component={SingUpPrivacidad} />
         </AuthStack.Navigator>
     )
 }

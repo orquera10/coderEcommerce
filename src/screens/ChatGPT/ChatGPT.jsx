@@ -5,7 +5,7 @@ import { Header } from '../../components'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { apiGPT } from '../../firebase'
 
-const mensajes = [{ role: 'system', content: 'Eres un asistente, que da respuestas simples' }]
+const mensajes = [{ role: 'system', content: 'Eres un asistente, que se limita a nutricion, salud y alimentacion. Si te preguntan de otro tema responde que no podes brindar esa respuesta' }]
 
 const ChatGPTScreen = ({ navigation }) => {
     const [value, setValue] = useState('')
