@@ -10,7 +10,7 @@ import { Header } from '../../components'
 
 const Profile = ({ navigation }) => {
     const image = useSelector(state => state.auth.imageCamera)
-    const { localId } = useSelector(state => state.auth)
+    const { localId, nombre, pais } = useSelector(state => state.auth)
     const [triggerSaveProfileImage, result] = usePostProfileImageMutation()
     const dispatch = useDispatch()
 
@@ -49,7 +49,9 @@ const Profile = ({ navigation }) => {
 
     const confirmImage = () => {
         triggerSaveProfileImage({ image, localId })
-        console.log(result)
+        .unwrap()
+        .then(result=>console.log(result))
+        
     }
 
     return (
@@ -72,6 +74,8 @@ const Profile = ({ navigation }) => {
                     resizeMode="cover"
                 />
             )}
+            <Text>{nombre}</Text>
+            <Text>{pais}</Text>
             <View style={styles.containerFot}>
                 <Pressable style={styles.cameraButton} onPress={pickImage}>
                     <Text style={styles.text}>Cambiar foto de perfil</Text>

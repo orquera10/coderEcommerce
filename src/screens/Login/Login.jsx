@@ -19,25 +19,36 @@ const Login = ({ navigation }) => {
             email,
             password,
         })
-        //console.log(result)
-        if (result.isSuccess) {
-            dispatch(setUser(result.data))
-            insertSession({
-                localId: result.data.localId,
-                email: result.data.email,
-                token: result.data.idToken,
+            .unwrap()
+            .then(result => {
+                dispatch(setUser(result))
+                insertSession({
+                    localId: result.localId,
+                    email: result.email,
+                    token: result.idToken,
+                })
+                    .then(result => console.log(result))
+                    .catch(error => console.log(error.message))
             })
-                .then(result => console.log(result))
-                .catch(error => console.log(error.message))
-        }
+        //console.log(result)
+        // if (result.isSuccess) {
+        //     dispatch(setUser(result.data))
+        //     insertSession({
+        //         localId: result.data.localId,
+        //         email: result.data.email,
+        //         token: result.data.idToken,
+        //     })
+        //         .then(result => console.log(result))
+        //         .catch(error => console.log(error.message))
+        // }
     }
 
     return (
         <View style={styles.container}>
             <View >
                 <Image
-                    source={require('../../../src/assets/img/logoDietik.png')} 
-                    style={{ width: 300, height: 200,  }}  
+                    source={require('../../../src/assets/img/logoDietik.png')}
+                    style={{ width: 300, height: 200, }}
                     resizeMode='contain'
                 />
             </View>

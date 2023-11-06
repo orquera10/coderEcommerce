@@ -7,6 +7,7 @@ import Location from './Location/LocationScreen'
 import Profile from './Profile/Profile'
 import Signup from './Signup/Signup'
 import Login from './Login/Login'
+import ChatGPT from './ChatGPT/ChatGPT'
 
 export { 
     Home, 
@@ -17,5 +18,6 @@ export {
     Location,
     Profile,
     Signup,
-    Login
+    Login,
+    ChatGPT
 }

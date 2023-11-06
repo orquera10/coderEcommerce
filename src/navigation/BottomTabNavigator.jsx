@@ -9,6 +9,8 @@ import StackNavigator from './StackNavigator'
 import { colors } from '../constants/colors'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import ProfileNavigator from './ProfileNavigator'
+import ChatGPTNavigator from './ChatGPTNavigator'
+import { Ionicons } from '@expo/vector-icons';
 
 const BottomTab = createBottomTabNavigator()
 
@@ -42,6 +44,18 @@ function BottomTabNavigator() {
                         <View style={focused ? styles.iconContainer : null}>
                             <MaterialCommunityIcons name="food-variant" size={25} color="black" />
                             {/* <Feather name="shopping-cart" size={24} color={colors.white} /> */}
+                        </View>
+                    ),
+                }}
+            />
+            <BottomTab.Screen
+                name="ChatGPT"
+                component={ChatGPTNavigator}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <View style={focused ? styles.iconContainer : null}>
+                            <Ionicons name="chatbubble" size={24} color="black" />
+                            {/* <Feather name="user" size={24} color={colors.white} /> */}
                         </View>
                     ),
                 }}

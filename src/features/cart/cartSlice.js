@@ -15,46 +15,68 @@ export const cartSlice = createSlice({
             const productRepeated = state.items.find(
                 item => item.id === action.payload.id
             )
-            if (productRepeated) {
-                const itemsUpdated = state.items.map(item => {
-                    if (item.id === action.payload.id) {
-                        item.quantity += action.payload.quantity
-                        return item
-                    }
-                    return item
-                })
-                const newtotal = itemsUpdated.reduce(
-                    (acc, current) => (acc += current.calorias * current.quantity),
-                    0
-                )
-                console.log('este es el tota', newtotal)
-                state.items = itemsUpdated;
-                state.total = newtotal;
-                state.updatedAt = new Date().toLocaleString();
-            } else {
-                state.items.push(action.payload)
-                const new2total = state.items.reduce(
-                    (acc, current) => (acc += current.calorias * current.quantity),
-                    0
-                )
+            if (!productRepeated)
+                return {
+                    ...state,
+                    items: [...state.items, action.payload],
+                    total: state.total + action.payload.calorias,
+                    updatedAt: new Date().toLocaleString(),
+                }
 
-                console.log('este es el total 2', new2total)
-                state.total = new2total;
-                state.updatedAt = new Date().toLocaleString();
+            const itemsUpdated = state.items.map(item => {
+                if (item.id === action.payload.id) {
+                    return Object.assign({}, item, {
+                        quantity: item.quantity + action.payload.quantity,
+                    })
+                }
+                return item
+            })
+            return {
+                ...state,
+                items: itemsUpdated,
+                total: state.total + action.payload.calorias,
+                updatedAt: new Date().toLocaleString(),
             }
+            // if (productRepeated) {
+            //     const itemsUpdated = state.items.map(item => {
+            //         if (item.id === action.payload.id) {
+            //             item.quantity += action.payload.quantity
+            //             return item
+            //         }
+            //         return item
+            //     })
+            //     const newtotal = itemsUpdated.reduce(
+            //         (acc, current) => (acc += current.calorias * current.quantity),
+            //         0
+            //     )
+            //     console.log('este es el tota', newtotal)
+            //     state.items = itemsUpdated;
+            //     state.total = newtotal;
+            //     state.updatedAt = new Date().toLocaleString();
+            // } else {
+            //     state.items.push(action.payload)
+            //     const new2total = state.items.reduce(
+            //         (acc, current) => (acc += current.calorias * current.quantity),
+            //         0
+            //     )
+
+            //     console.log('este es el total 2', new2total)
+            //     state.total = new2total;
+            //     state.updatedAt = new Date().toLocaleString();
+            // }
         },
         removeItem: (state, action) => {
             const itemIdToRemove = action.payload; // Supongo que action.payload es el ID del elemento a eliminar
-        
+
             // Filtramos los elementos para mantener solo aquellos cuyo ID no coincide con el ID a eliminar
             const updatedItems = state.items.filter(item => item.id !== itemIdToRemove);
-        
+
             // Calculamos el nuevo total
             const newTotal = updatedItems.reduce(
                 (acc, current) => acc + current.calorias * current.quantity,
                 0
             );
-        
+
             return {
                 ...state,
                 items: updatedItems,
@@ -73,6 +95,6 @@ export const cartSlice = createSlice({
     },
 })
 
-export const { addItem, removeItem , clearCart} = cartSlice.actions
+export const { addItem, removeItem, clearCart } = cartSlice.actions
 
 export default cartSlice.reducer

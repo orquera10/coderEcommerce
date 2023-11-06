@@ -17,7 +17,7 @@ export default styles = StyleSheet.create({
         width: '95%',
         backgroundColor: colors.secondary,
         height: 50,
-        marginVertical: 15,
+        marginVertical: 10,
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 10
