@@ -15,7 +15,7 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
     },
     subTitle: {
-        color: colors.primary,
+        color: colors.secondary,
         fontSize: 18,
     },
     loginContainer: {
@@ -64,6 +64,6 @@ export default styles = StyleSheet.create({
     },
     textRegister: {
         color: colors.primary,
-        fontSize: 20,
+        fontSize: 17,
     }
 })

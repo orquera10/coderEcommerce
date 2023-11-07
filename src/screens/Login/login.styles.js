@@ -63,6 +63,6 @@ export default styles = StyleSheet.create({
     },
     textRegister: {
         color: colors.secondary,
-        fontSize: 20,
+        fontSize: 17,
     }
 })
