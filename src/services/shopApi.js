@@ -38,12 +38,17 @@ export const shopApi = createApi({
             query: localId => `profileData/${localId}.json`,
         }),
         postProfileData: builder.mutation({
-            query: ({ localId, nombre, pais}) => ({
+            query: ({ localId, nombre, pais, peso, altura, edad, sexo, afeccion}) => ({
                 url: `profileData/${localId}.json`,
                 method: 'PUT',
                 body: {
                     nombre: nombre,
                     pais: pais,
+                    peso: peso,
+                    altura: altura,
+                    edad: edad,
+                    sexo: sexo,
+                    afeccion: afeccion
                 },
             }),
         }),

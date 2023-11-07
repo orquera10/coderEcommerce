@@ -1,7 +1,7 @@
 import { Button, Modal as NewModal, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const ModalError = ({ modalVisible, onHandleDelete, setModalVisible, errorSingUp }) => {
+const ModalErrorGeneral = ({ modalVisible, onHandleDelete, setModalVisible, errorSingUp }) => {
     console.log(errorSingUp);
     return (
         <NewModal visible={modalVisible} animationType="slide" transparent={true}>
@@ -28,7 +28,7 @@ const ModalError = ({ modalVisible, onHandleDelete, setModalVisible, errorSingUp
     )
 }
 
-export default ModalError
+export default ModalErrorGeneral
 
 const styles = StyleSheet.create({
     modalContainer: {

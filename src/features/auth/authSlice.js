@@ -29,7 +29,7 @@ export const authSlice = createSlice({
             }
         },
         setUserTemp: (state, action) => {
-            console.log(action.payload)
+            // console.log(action.payload)
             return {
                 email: action.payload.email,
                 password: action.payload.password

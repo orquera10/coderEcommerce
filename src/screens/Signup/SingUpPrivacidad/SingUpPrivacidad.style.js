@@ -41,6 +41,7 @@ export default styles = StyleSheet.create({
         borderRadius: 10,
         fontSize: 17,
         fontWeight: 'bold',
+        color: colors.secondary
     },
     loginButton: {
         borderColor: colors.primary,
@@ -82,6 +83,7 @@ export default styles = StyleSheet.create({
     textScroll:{
         color: colors.secondary,
         fontFamily: 'ABeeZee',
-        textAlign: 'justify'
+        textAlign: 'justify',
+        paddingVertical: 15
     }
 })

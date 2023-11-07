@@ -6,63 +6,29 @@ import { useDispatch } from 'react-redux'
 import { useSignUpMutation } from '../../../services/authApi'
 import { insertSession } from '../../../db'
 import { usePostProfileDataMutation } from '../../../services/shopApi'
-import { ModalError } from '../../../components'
 
 const Signup = ({ navigation }) => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
-    // const [nombre, setNombre] = useState('')
-    // const [pais, setPais] = useState('')
-    
+    const [aviso, setAviso] = useState(true)
 
     const [triggerSignup, result] = useSignUpMutation()
     const [triggerPostProfileData, resultProfile] = usePostProfileDataMutation()
     const dispatch = useDispatch()
-    const [modalVisible, setModalVisible] = useState(false)
 
-    const [errorSingup, setErrorSingup] = useState('')
 
     const onSubmit = () => {
-        console.log(email, password, confirmPass)
-        const data = {email:email,password:password}
-        dispatch(setUserTemp(data))
-        navigation.navigate('SingUpData')
-        // triggerSignup({
-        //     email,
-        //     password,
-        // })
-        //     .unwrap()
-        //     .then(result => {
-        //         console.log(result)
-        //         dispatch(setUser(result))
-        //         insertSession({
-        //             localId: result.localId,
-        //             email: result.email,
-        //             token: result.idToken,
-        //         })
+        if (email && password && confirmPass) {
+            console.log(email, password, confirmPass)
+            const data = { email: email, password: password }
+            dispatch(setUserTemp(data))
+            navigation.navigate('SingUpData')
+        } else{
+            setAviso(false)
+            console.log('Completar informacion');
+        }
 
-        //         const localId = result.localId
-        //         const datosUser = {
-        //             localId: localId,
-        //             nombre: nombre,
-        //             pais: pais,
-        //         }
-        //         console.log(datosUser);
-        //         dispatch(setProfileData(datosUser))
-        //         triggerPostProfileData(datosUser)
-        //             .unwrap()
-        //             .then(result => console.log(result))
-        //     })
-        //     .catch(err => {
-        //         setErrorSingup(err.data.error.message)
-        //         console.log(errorSingup);
-        //         setModalVisible(true)
-        //     })
-        // console.log(result)
-        // if (result.isSuccess) {
-        //     dispatch(setUser(result.data))
-        // }
     }
     const onHandleDelete = () => {
         setModalVisible(false)
@@ -87,7 +53,6 @@ const Signup = ({ navigation }) => {
 
                 <View style={styles.containerInputs}>
 
-                    {/*  <Input mode="flat" label="Email" style={styles.email} /> */}
                     <TextInput
                         style={styles.input}
                         value={email}
@@ -109,22 +74,8 @@ const Signup = ({ navigation }) => {
                         placeholder="Repetir Contraseña"
                         placeholderTextColor="#E3E9E2"
                     />
-                    {/* <TextInput
-                    style={styles.inputEmail}
-                    value={nombre}
-                    onChangeText={setNombre}
-                    placeholder="Cómo te llamas?"
-                />
-                <TextInput
-                    style={styles.inputEmail}
-                    value={pais}
-                    onChangeText={setPais}
-                    placeholder="De que país sos?"
-                /> */}
-                    <Pressable style={styles.loginButton}
-                        onPress={onSubmit}
-                        
-                    >
+                    {aviso ? <Text></Text> : <Text style={{color:'red'}}>Completa todos los campos!</Text>}
+                    <Pressable style={styles.loginButton} onPress={onSubmit}>
                         <Text style={styles.text}>Continuar</Text>
                     </Pressable>
                     <View style={styles.register}>
@@ -137,7 +88,7 @@ const Signup = ({ navigation }) => {
                 </View>
 
             </View>
-            <ModalError modalVisible={modalVisible} onHandleDelete={onHandleDelete} setModalVisible={setModalVisible} errorSingUp={errorSingup} />
+
         </View>
     )
 }

@@ -1,10 +1,9 @@
-import { Pressable, Text, TextInput, View, Image, ScrollView } from 'react-native'
+import { Pressable, Text, View, Image, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-import { TextInput as Input } from 'react-native-paper'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import { setUser, setProfileData } from '../../../features/auth/authSlice'
 import styles from './SingUpPrivacidad.style'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useSignUpMutation } from '../../../services/authApi'
 import { insertSession } from '../../../db'
 import { usePostProfileDataMutation } from '../../../services/shopApi'
@@ -12,61 +11,64 @@ import { ModalError } from '../../../components'
 
 
 const SingUpPrivacidad = ({ navigation }) => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPass, setConfirmPass] = useState('')
-    const [nombre, setNombre] = useState('')
-    const [pais, setPais] = useState('')
     const [isChecked, setChecked] = useState(false);
 
     const [triggerSignup, result] = useSignUpMutation()
     const dispatch = useDispatch()
-    const [triggerPostProfileData, resultProfile] = usePostProfileDataMutation()
+    const [triggerPostProfileData] = usePostProfileDataMutation()
     const [modalVisible, setModalVisible] = useState(false)
-
     const [errorSingup, setErrorSingup] = useState('')
+    const [errorTerminos, setErrorTerminos] = useState(true)
+
+    const dataProfile = useSelector(state => state.auth)
 
     const onSubmit = () => {
-        console.log(email, password, confirmPass)
-        triggerSignup({
-            email,
-            password,
-        })
-            .unwrap()
-            .then(result => {
-                console.log(result)
-                dispatch(setUser(result))
-                insertSession({
-                    localId: result.localId,
-                    email: result.email,
-                    token: result.idToken,
-                })
+        if (isChecked) {
+            const dataSingUp = {
+                email: dataProfile.email,
+                password: dataProfile.password
+            }
+            triggerSignup(dataSingUp)
+                .unwrap()
+                .then(result => {
+                    console.log(result)
+                    dispatch(setUser(result))
+                    insertSession({
+                        localId: result.localId,
+                        email: result.email,
+                        token: result.idToken,
+                    })
 
-                const localId = result.localId
-                const datosUser = {
-                    localId: localId,
-                    nombre: nombre,
-                    pais: pais,
-                }
-                console.log(datosUser);
-                dispatch(setProfileData(datosUser))
-                triggerPostProfileData(datosUser)
-                    .unwrap()
-                    .then(result => console.log(result))
-            })
-            .catch(err => {
-                setErrorSingup(err.data.error.message)
-                console.log(errorSingup);
-                setModalVisible(true)
-            })
-        // console.log(result)
-        // if (result.isSuccess) {
-        //     dispatch(setUser(result.data))
-        // }
+                    const localId = result.localId
+                    const datosUser = {
+                        localId: localId,
+                        nombre: dataProfile.nombre,
+                        pais: dataProfile.pais,
+                        peso: dataProfile.peso,
+                        altura: dataProfile.altura,
+                        edad: dataProfile.edad,
+                        sexo: dataProfile.sexo,
+                        afecciones: dataProfile.afecciones
+                    }
+                    console.log(datosUser);
+                    dispatch(setProfileData(datosUser))
+                    triggerPostProfileData(datosUser)
+                        .unwrap()
+                        .then(result => console.log(result))
+                })
+                .catch(err => {
+                    setErrorSingup(err.data.error.message)
+                    console.log(errorSingup);
+                    setModalVisible(true)
+                })
+        } else {
+            console.log('no acepto términos y condiciones');
+            setErrorTerminos(false)
+        }
     }
     const onHandleDelete = () => {
-
         setModalVisible(false)
+        navigation.navigate('Signup')
     }
     return (
         <View style={styles.container}>
@@ -117,20 +119,38 @@ const SingUpPrivacidad = ({ navigation }) => {
                         {'\n'}
                         {'\n'}8. Contacto
                         Si tienes preguntas o comentarios sobre estos Términos, por favor contáctanos a dietik@soport.com.</Text></ScrollView>
-                    <View style={{flexDirection:'row', alignItems:'center', marginTop:15}}>
-                        <BouncyCheckbox
-                            isChecked={isChecked}
-                            onPress={() => setChecked(!isChecked)}
-                            fillColor='#44693D'
-                        />
-                        <Text style={[styles.text,{fontSize:15, marginStart:7}]}>Acepto términos y condiciones</Text>
-                    </View>
+
+                    {errorTerminos || isChecked===true ?
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
+                            <BouncyCheckbox
+                                isChecked={isChecked}
+                                onPress={() => {
+                                    setChecked(!isChecked)
+                                    setErrorTerminos(!isChecked)
+                                }}
+                                fillColor='#44693D'
+                            />
+                            <Text style={[styles.text, { fontSize: 15, marginStart: 7 }]}>Acepto términos y condiciones</Text>
+                        </View> :
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
+                            <BouncyCheckbox
+                                isChecked={isChecked}
+                                onPress={() => {
+                                    setChecked(!isChecked)
+                                    setErrorTerminos(!isChecked)
+                                }}
+                                fillColor='red'
+                                unfillColor='red'
+                            />
+                            <Text style={[styles.text, { fontSize: 15, marginStart: 7, color: 'red' }]}>Acepto términos y condiciones</Text>
+                        </View>
+                    }
 
 
-                    <Pressable style={styles.loginButton}
-                        // onPress={onSubmit}
-                        onPress={() => navigation.navigate('SingUpPrivacidad')}
-                    >
+
+
+
+                    <Pressable style={styles.loginButton} onPress={onSubmit} >
                         <Text style={styles.text}>Registrarse</Text>
                     </Pressable>
                     <View style={styles.register}>
