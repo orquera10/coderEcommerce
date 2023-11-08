@@ -3,15 +3,19 @@ import React from 'react'
 import { addItem } from '../../features/cart/cartSlice'
 import styles from './Details.style'
 import { useDispatch } from 'react-redux'
-import { Header } from '../../components'
+import { Header, ModalErrorGeneral } from '../../components'
+import { useState } from 'react'
 
 const Details = ({ route }) => {
   const { product } = route.params
   const dispatch = useDispatch()
+  const [modalVisible, setModalVisible] = useState(false)
 
   const handleAddToCart = () => {
     dispatch(addItem({ ...product, quantity: 1 }))
+    setModalVisible(true)
   }
+
   return (
     <SafeAreaView style={styles.container}>
       <Header title={'Detalle'} />
@@ -24,6 +28,7 @@ const Details = ({ route }) => {
       <Pressable onPress={handleAddToCart} style={styles.buttonLogout}>
         <Text style={styles.textLogout}>Agregar a comida</Text>
       </Pressable>
+      <ModalErrorGeneral modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </SafeAreaView>
   )
 }
