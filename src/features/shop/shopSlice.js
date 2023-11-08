@@ -8,6 +8,7 @@ const initialState = {
     productsFilteredByCategory: [],
     categorySelected: null,
     productIdSelected: null,
+    ordenes: null
 }
 
 export const shopSlice = createSlice({
@@ -20,9 +21,15 @@ export const shopSlice = createSlice({
         setProductIdSelected: (state, action) => {
             state.productIdSelected = action.payload
         },
+        setOrders: (state, action) => {
+            return {
+                ...state,
+                ordenes: action.payload,
+            };
+        },
     },
 })
 
-export const { setCategorySelected, setProductIdSelected } = shopSlice.actions
+export const { setCategorySelected, setProductIdSelected, setOrders } = shopSlice.actions
 
 export default shopSlice.reducer

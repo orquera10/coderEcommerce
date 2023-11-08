@@ -1,22 +1,24 @@
-import { Pressable, SafeAreaView, Text, TextInput, ScrollView, Keyboard, ActivityIndicator } from 'react-native'
+import { Pressable, SafeAreaView, Text, TextInput, ScrollView, Keyboard, ActivityIndicator, View } from 'react-native'
 import React, { useState } from 'react'
 import styles from './ChatGPT.style'
 import { Header } from '../../components'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { apiGPT } from '../../firebase'
+import { colors } from '../../constants/colors'
 
-const mensajes = [{ role: 'system', content: 'Eres un asistente, que se limita a nutricion, salud y alimentacion. Si te preguntan de otro tema responde que no podes brindar esa respuesta' }]
+
 
 const ChatGPTScreen = ({ navigation }) => {
     const [value, setValue] = useState('')
     const [respuesta, setRespuesta] = useState('')
     const [loading, setLoading] = useState(false);
-    
+    const mensajes = [{ role: 'system', content: 'Eres un asistente, que se limita a nutricion, salud y alimentacion. Si te preguntan de otro tema responde que no podes brindar esa respuesta' }]
+
     const search = async () => {
         setLoading(true);
         mensajes.push({ role: 'user', content: value });
         console.log(mensajes);
-        
+
 
         const response = await fetch(`https://api.openai.com/v1/chat/completions`, {
             method: 'POST',
@@ -31,10 +33,10 @@ const ChatGPTScreen = ({ navigation }) => {
         })
         const data = await response.json();
         setRespuesta(data.choices[0].message.content);
-        
+
         mensajes.push({ role: 'assistant', content: data.choices[0].message.content });
-        
-        
+
+
         console.log(data.choices[0].message.content);
         console.log(mensajes);
         Keyboard.dismiss();
@@ -50,21 +52,27 @@ const ChatGPTScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <Header title={'ChatGPT'} />
-            <Text>Pantalla de chat</Text>
-            <TextInput
-                style={styles.input}
-                value={value}
-                onChangeText={text => setValue(text)}
-                placeholder="Buscar comida"
-            />
-            <Pressable onPress={search}>
-                <AntDesign name="search1" size={25} color={'black'} />
-            </Pressable>
-            <Pressable onPress={clearInput}>
-                <AntDesign name="closecircleo" size={25} color={'black'} />
-            </Pressable>
-            {loading && <ActivityIndicator size="large" color="#0000ff" />}
-            {respuesta && <ScrollView><Text>{respuesta}</Text></ScrollView>}
+            <View style={styles.barraBus}>
+                <TextInput
+                    style={styles.input}
+                    value={value}
+                    onChangeText={text => setValue(text)}
+                    placeholder="Realiza tus consultas alimentarias"
+                    placeholderTextColor={colors.primary}
+                />
+                <Pressable onPress={search}>
+                    <AntDesign name="search1" size={30} color={colors.secondary} style={{ marginHorizontal: 5, marginStart: 10 }} />
+                </Pressable>
+                <Pressable onPress={clearInput}>
+                    <AntDesign name="closecircleo" size={30} color={colors.secondary} style={{ marginHorizontal: 5 }} />
+                </Pressable>
+            </View>
+
+            <View style={styles.containerAbajo}>
+                {loading && <ActivityIndicator size="large" color={colors.secondary} />}
+                {respuesta && <ScrollView style={styles.contenedorRes}><Text style={styles.textoGpt}>{respuesta}</Text></ScrollView>}
+            </View>
+
         </SafeAreaView>
     )
 }

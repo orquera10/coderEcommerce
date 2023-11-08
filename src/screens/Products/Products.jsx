@@ -44,7 +44,7 @@ const Products = ({ navigation }) => {
                   resizeMode='contain'
                 />
                 <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.price}>{`cal ${item.calorias.toFixed(2)}`}</Text>
+                <Text style={styles.price}>{`cal ${item.calorias}`}</Text>
               </TouchableOpacity>
             )}
             keyExtractor={item => item.id}

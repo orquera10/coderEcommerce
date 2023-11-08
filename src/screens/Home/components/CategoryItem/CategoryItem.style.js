@@ -15,5 +15,7 @@ export default styles = StyleSheet.create({
   text: {
     fontFamily: 'ABeeZee',
     fontSize: 17,
+    color: colors.primary,
+    fontWeight: 'bold'
   },
 })

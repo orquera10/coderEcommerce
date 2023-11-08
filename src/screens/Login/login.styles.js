@@ -41,6 +41,7 @@ export default styles = StyleSheet.create({
         borderRadius: 10,
         fontSize: 17,
         fontWeight: 'bold',
+        color: colors.primary
     },
     loginButton: {
         borderColor: colors.secondary,

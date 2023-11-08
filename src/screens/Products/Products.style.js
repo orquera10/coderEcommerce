@@ -28,11 +28,15 @@ export default styles = StyleSheet.create({
     fontFamily: 'ABeeZee',
     fontWeight: '700',
     fontVariant: 'small-caps',
+    color: colors.primary,
+    fontWeight: 'bold'
   },
   price: {
     fontFamily: 'ABeeZee',
     fontSize: 20,
     fontVariant: '',
+    color: colors.primary,
+    fontWeight: 'bold'
   },
   image: {
     alignSelf: 'center',
