@@ -41,7 +41,8 @@ export default styles = StyleSheet.create({
     marginTop: 20
   },
   buttonLogout: {
-    backgroundColor: colors.secondary,
+    borderColor: colors.secondary,
+    borderWidth: 2,
     padding: 10,
     borderRadius: 15,
     height: 50,
@@ -55,5 +56,6 @@ export default styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 17,
     fontFamily: 'ABeeZee',
+    color: colors.secondary
   }
 })

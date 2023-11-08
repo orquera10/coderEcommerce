@@ -28,11 +28,11 @@ const SearchInput = ({ onSearch }) => {
         onChangeText={setValue}
         placeholder="Buscar comida"
       />
-      <Pressable onPress={search}>
-        <AntDesign name="search1" size={25} color={'black'} />
+      <Pressable onPress={search} style={{marginHorizontal:10}}>
+        <AntDesign name="search1" size={30} color={'#E3E9E2'} />
       </Pressable>
-      <Pressable onPress={clearInput}>
-        <AntDesign name="closecircleo" size={25} color={'black'} />
+      <Pressable onPress={clearInput} style={{marginHorizontal:10}}>
+        <AntDesign name="closecircleo" size={35} color={'#E3E9E2'} />
       </Pressable>
     </View>
   )

@@ -19,52 +19,74 @@ const Login = ({ navigation }) => {
             email,
             password,
         })
-        //console.log(result)
-        if (result.isSuccess) {
-            dispatch(setUser(result.data))
-            insertSession({
-                localId: result.data.localId,
-                email: result.data.email,
-                token: result.data.idToken,
+            .unwrap()
+            .then(result => {
+                dispatch(setUser(result))
+                insertSession({
+                    localId: result.localId,
+                    email: result.email,
+                    token: result.idToken,
+                })
+                    .then(result => console.log(result))
+                    .catch(error => console.log(error.message))
             })
-                .then(result => console.log(result))
-                .catch(error => console.log(error.message))
-        }
+        //console.log(result)
+        // if (result.isSuccess) {
+        //     dispatch(setUser(result.data))
+        //     insertSession({
+        //         localId: result.data.localId,
+        //         email: result.data.email,
+        //         token: result.data.idToken,
+        //     })
+        //         .then(result => console.log(result))
+        //         .catch(error => console.log(error.message))
+        // }
     }
 
     return (
         <View style={styles.container}>
-            <View >
+            <View style={styles.containerArriba}>
                 <Image
-                    source={require('../../../src/assets/img/logoDietik.png')} 
-                    style={{ width: 300, height: 200,  }}  
+                    source={require('../../../src/assets/img/logoDietik.png')}
+                    style={{ height: 50, margin: 3 }}
                     resizeMode='contain'
                 />
+                <Text style={styles.subTitle}>Planes Alimentarios</Text>
+                <Text style={styles.subTitle}>potenciadas con IA</Text>
             </View>
+
             <View style={styles.loginContainer}>
-                <Text style={{ fontSize: 20 }}>Ingresar</Text>
-                <TextInput
-                    style={styles.inputEmail}
-                    value={email}
-                    onChangeText={setEmail}
-                    placeholder="Email"
+                <Image
+                    source={require('../../../src/assets/img/fondoAuth.png')}
+                    style={{ position: 'absolute', height: '100%', opacity: 0.1 }}
                 />
-                <TextInput
-                    style={styles.inputEmail}
-                    value={password}
-                    onChangeText={setPassword}
-                    placeholder="Contraseña"
-                />
-                <Pressable style={styles.loginButton} onPress={onSubmit}>
-                    <Text style={{ color: 'white', fontSize: 20, fontFamily: 'ABeeZee', }}>Inicia Sesión</Text>
-                </Pressable>
-                <Text style={{ fontSize: 20 }}>No tienes una cuenta?</Text>
-                <Pressable
-                    style={styles.loginButton}
-                    onPress={() => navigation.navigate('Signup')}
-                >
-                    <Text style={{ color: 'white', fontSize: 20, fontFamily: 'ABeeZee', }}>Registrate</Text>
-                </Pressable>
+                <View style={styles.containerInputs}>
+                    <TextInput
+                        style={styles.input}
+                        value={email}
+                        onChangeText={setEmail}
+                        placeholder="Email"
+                        placeholderTextColor="#44693D"
+                    />
+                    <TextInput
+                        style={styles.input}
+                        value={password}
+                        onChangeText={setPassword}
+                        placeholder="Contraseña"
+                        placeholderTextColor="#44693D"
+                    />
+                    <Pressable style={styles.loginButton} onPress={onSubmit}>
+                        <Text style={styles.text}>Inicia Sesión</Text>
+                    </Pressable>
+
+                    <View style={styles.register}>
+                        <Text style={styles.textRegister}>No tienes una cuenta? </Text>
+                        <Pressable onPress={() => navigation.navigate('Signup')}>
+                            <Text style={[styles.textRegister, { fontWeight: 'bold' }]}>Registrate</Text>
+                        </Pressable>
+                    </View>
+                </View>
+
             </View>
         </View>
     )

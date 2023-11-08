@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { colors } from '../../constants/colors'
+import { colors } from '../../../constants/colors'
 
 export default styles = StyleSheet.create({
     container: {
@@ -9,18 +9,18 @@ export default styles = StyleSheet.create({
     },
     containerArriba: {
         flex: 1,
-        backgroundColor: colors.secondary,
+        backgroundColor: colors.primary,
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
     },
     subTitle: {
-        color: colors.primary,
+        color: colors.secondary,
         fontSize: 18,
     },
     loginContainer: {
         flex: 2,
-        backgroundColor: colors.primary,
+        backgroundColor: colors.secondary,
         width: '100%',
         paddingHorizontal: 20,
         alignItems: 'center',
@@ -32,7 +32,7 @@ export default styles = StyleSheet.create({
     },
     input: {
         width: '95%',
-        backgroundColor: colors.secondary,
+        backgroundColor: colors.primary,
         height: 30,
         marginVertical: 15,
         justifyContent: 'center',
@@ -41,10 +41,10 @@ export default styles = StyleSheet.create({
         borderRadius: 10,
         fontSize: 17,
         fontWeight: 'bold',
-        color: colors.primary
+        color: colors.secondary
     },
     loginButton: {
-        borderColor: colors.secondary,
+        borderColor: colors.primary,
         borderWidth: 2,
         width: '95%',
         height: 45,
@@ -55,15 +55,16 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
     },
     register: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems:'center',
     },
     text: {
-        color: colors.secondary,
+        color: colors.primary,
         fontSize: 20,
         fontFamily: 'ABeeZee',
     },
     textRegister: {
-        color: colors.secondary,
+        color: colors.primary,
         fontSize: 17,
     }
 })

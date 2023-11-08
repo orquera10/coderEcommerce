@@ -11,14 +11,16 @@ import { clearCart } from '../../features/cart/cartSlice'
 const Cart = () => {
     const cart = useSelector(state => state.cart.items)
     const total = useSelector(state => state.cart.total)
+    const { user, localId } = useSelector(state => state.auth)
     const [triggerPost, result] = usePostOrderMutation()
     const dispatch = useDispatch();
     const [comida, setComida] = useState('Desayuno'); // Estado para rastrear la selección del usuario
+    const opciones = { timeZone: 'America/Argentina/Buenos_Aires' }
 
     const renderItem = ({ item }) => <CartItem item={item} />
 
     const confirmCart = () => {
-        triggerPost({ total, cart, comida, user: 'LoggedUser' })
+        triggerPost({ total, cart, comida, user, fecha: new Date().toLocaleString('es-ES', opciones), localId })
         dispatch(clearCart())
     }
 

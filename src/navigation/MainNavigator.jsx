@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { setCameraImage, setUser } from '../features/auth/authSlice'
+import { setCameraImage, setProfileData, setUser } from '../features/auth/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 import AuthStackNavigator from './AuthStackNavigator'
 import BottomTabNavigator from './BottomTabNavigator'
 import { fetchSession } from '../db'
-import { useGetProfileImageQuery } from '../services/shopApi'
+import { useGetProfileImageQuery, useGetProfileDataQuery } from '../services/shopApi'
 
 const MainNavigator = () => {
     //const [user, setuser] = useState(null)
     const { user, localId } = useSelector(state => state.auth)
     const dispatch = useDispatch()
-    const { data, error, isLoading } = useGetProfileImageQuery(localId)
+    const imagaData =  useGetProfileImageQuery(localId)
+    const profileData = useGetProfileDataQuery(localId)
 
     useEffect(() => {
-        console.log('Main navigator data', data)
-        if (data) {
-            dispatch(setCameraImage(data.image))
+        console.log('Main navigator data', imagaData.data)
+        if (imagaData.data) {
+            dispatch(setCameraImage(imagaData.data.image))
         }
-    }, [data])
+    }, [imagaData.data])
+
+    useEffect(() => {
+        console.log('profile data es',profileData.data);
+        if (profileData.data) {
+            dispatch(setProfileData(profileData.data))
+        }
+    }, [profileData.data])
 
     useEffect(() => {
         ; (async () => {
