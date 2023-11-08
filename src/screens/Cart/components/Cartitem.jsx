@@ -5,6 +5,7 @@ import React from 'react'
 import styles from './CartItem.styles'
 import { useDispatch } from 'react-redux'
 import { removeItem } from '../../../features/cart/cartSlice'
+import { colors } from '../../../constants/colors'
 
 const Cartitem = ({ item }) => {
 
@@ -28,11 +29,11 @@ const Cartitem = ({ item }) => {
             </View>
             <View style={styles.details}>
                 <View >
-                    <Text>qty. {item.quantity}</Text>
-                    <Text>cal. {item.calorias}</Text>
+                    <Text style={{color: colors.primary}}>qty. {item.quantity}</Text>
+                    <Text style={{color: colors.primary, fontWeight: 'bold'}}>cal. {item.calorias}</Text>
                 </View>
                 <Pressable onPress={handleRemoveToCart}>
-                    <Feather name="trash" size={24} color={'red'} />
+                    <Feather name="trash" size={24} color={colors.quaternary} />
                 </Pressable>
             </View>
         </View>

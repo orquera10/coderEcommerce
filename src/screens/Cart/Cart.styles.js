@@ -12,23 +12,25 @@ export default styles = StyleSheet.create({
         borderWidth: 2,
         borderColor:colors.secondary,
         borderRadius: 15,
-        marginVertical: 15,
+        marginVertical: 8,
         marginHorizontal: 30,
         paddingHorizontal: 30,
-        paddingVertical: 8,
+        paddingVertical: 5,
     },
     textFood:{
         fontSize: 17,
         fontFamily: 'ABeeZee',
         color: colors.secondary,
-        marginTop: 10
+        marginTop: 5,
+        fontWeight: 'bold'
     },
     picker:{
         width: '70%',
-        color: colors.secondary
+        color: colors.secondary,
+        
     },
     listContainer: {
-        flex: 3,
+        height: '52%'
     },
     buttonContainer: {
         flex: 1,
@@ -63,5 +65,7 @@ export default styles = StyleSheet.create({
     text:{
         fontSize: 17,
         fontFamily: 'ABeeZee',
+        color: colors.primary,
+        fontWeight: 'bold',
     }
 })

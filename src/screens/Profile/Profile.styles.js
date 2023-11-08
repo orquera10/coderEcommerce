@@ -12,7 +12,7 @@ export default styles = StyleSheet.create({
         width: 200,
         height: 200,
         borderRadius: 30,
-        margin: 50,
+        margin: 25,
     },
     containerFot:{
         alignItems: 'center',
@@ -50,6 +50,22 @@ export default styles = StyleSheet.create({
     textLogout:{
         fontSize: 17,
         fontFamily: 'ABeeZee',
+    },
+    fichaPrifile:{
+        backgroundColor: colors.secondary,
+        width: '70%',
+        padding: 10,
+        borderRadius: 15,
+        alignItems: 'center',
+        marginBottom: 15
+    },
+    text1:{
+        color: colors.primary,
+        fontWeight: "bold",
+        fontFamily: 'ABeeZee'
+    },
+    fichaPrifileSub:{
+        flexDirection: 'row',
     }
     
 })

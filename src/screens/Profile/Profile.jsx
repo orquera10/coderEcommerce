@@ -10,7 +10,7 @@ import { Header } from '../../components'
 
 const Profile = ({ navigation }) => {
     const image = useSelector(state => state.auth.imageCamera)
-    const { localId, nombre, pais } = useSelector(state => state.auth)
+    const { localId, nombre, pais, peso, altura } = useSelector(state => state.auth)
     const [triggerSaveProfileImage, result] = usePostProfileImageMutation()
     const dispatch = useDispatch()
 
@@ -49,9 +49,9 @@ const Profile = ({ navigation }) => {
 
     const confirmImage = () => {
         triggerSaveProfileImage({ image, localId })
-        .unwrap()
-        .then(result=>console.log(result))
-        
+            .unwrap()
+            .then(result => console.log(result))
+
     }
 
     return (
@@ -74,8 +74,15 @@ const Profile = ({ navigation }) => {
                     resizeMode="cover"
                 />
             )}
-            <Text>{nombre}</Text>
-            <Text>{pais}</Text>
+            <View style={styles.fichaPrifile}>
+                <Text style={[styles.text1,{fontSize: 20}]}>{nombre}</Text>
+                <Text style={[styles.text1,{fontSize: 16}]}>{pais}</Text>
+                <View style={styles.fichaPrifileSub}>
+                    <Text style={[styles.text1,{fontSize: 16, marginHorizontal: 10}]}>Peso: {peso} Kg</Text>
+                    <Text style={[styles.text1,{fontSize: 16, marginHorizontal: 10}]}>Altura: {altura} mts</Text>
+                </View>
+            </View>
+
             <View style={styles.containerFot}>
                 <Pressable style={styles.cameraButton} onPress={pickImage}>
                     <Text style={styles.text}>Cambiar foto de perfil</Text>

@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
     containerFlat:{
         width: '100%',
         height: '80%',
-        backgroundColor: colors.secondary,
+        backgroundColor: colors.primary,
         marginVertical: 20
     }
 })

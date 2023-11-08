@@ -15,7 +15,9 @@ export default styles = StyleSheet.create({
     name: {
         fontSize: 20,
         marginHorizontal: 20,
-        minWidth: 150
+        minWidth: 150,
+        color: colors.primary,
+        fontWeight: 'bold'
     },
     image: {
         width: 70,
