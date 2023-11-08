@@ -14,7 +14,6 @@ Dietick es una aplicación móvil desarrollada con React Native y Expo que te pe
 - Expo: Plataforma que facilita el desarrollo y la publicación de aplicaciones React Native.
 - Firebase: Base de datos y autenticación de usuarios.
 - SQLite: Base de datos local para almacenar información de manera eficiente en el dispositivo del usuario.
-- [Otras tecnologías o paquetes que utilices en tu proyecto]
 
 ## Instalación
 
