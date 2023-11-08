@@ -6,6 +6,7 @@ import { useGetOrderQuery } from '../../services/shopApi'
 import { FlatList } from 'react-native'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { TarjetaOrden } from './Components'
 
 
 
@@ -28,8 +29,8 @@ const Orders = ({ navigation }) => {
         }
     }, [isLoading])
 
-    onSubmit = () =>{
-        
+    onSubmit = () => {
+
     }
 
     return (
@@ -38,18 +39,18 @@ const Orders = ({ navigation }) => {
             <View>
                 {!isLoading && (
                     <FlatList
+                        style={styles.containerFlat}
                         data={ordenes}
                         keyExtractor={order => order.id}
                         renderItem={({ item }) => (
-                            <Text>{item.total}</Text>
-                            // <CategoryItem category={item.title} navigation={navigation} />
+                                <TarjetaOrden item={item} navigation={navigation}/>
                         )}
                     />
                 )}
             </View>
-            <Pressable style={styles.loginButton} onPress={onSubmit}>
+            {/* <Pressable style={styles.loginButton} onPress={onSubmit}>
                 <Text style={styles.text}>Actualizar</Text>
-            </Pressable>
+            </Pressable> */}
         </SafeAreaView>
     )
 }

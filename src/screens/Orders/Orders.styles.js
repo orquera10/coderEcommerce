@@ -6,4 +6,10 @@ export default styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.primary,
     },
+    containerFlat:{
+        width: '100%',
+        height: '80%',
+        backgroundColor: colors.secondary,
+        marginVertical: 20
+    }
 })
