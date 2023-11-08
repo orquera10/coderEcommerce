@@ -24,3 +24,6 @@ Dietick es una aplicación móvil desarrollada con React Native y Expo que te pe
    # o
    yarn install
 
+## Video
+
+[![Video de navegacion por aplicacion]](https://drive.google.com/file/d/1--foiUKdzdz5Txzeswx2cTR4E49AkBvz/view?usp=sharing)
