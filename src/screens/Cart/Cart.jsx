@@ -7,10 +7,12 @@ import styles from './Cart.styles'
 import { usePostOrderMutation } from '../../services/shopApi'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearCart } from '../../features/cart/cartSlice'
+import { setOrders } from '../../features/shop/shopSlice';
 
 const Cart = () => {
     const cart = useSelector(state => state.cart.items)
     const total = useSelector(state => state.cart.total)
+    const { ordenes } = useSelector(state => state.shop)
     const { user, localId } = useSelector(state => state.auth)
     const [triggerPost, result] = usePostOrderMutation()
     const dispatch = useDispatch();
@@ -20,8 +22,21 @@ const Cart = () => {
     const renderItem = ({ item }) => <CartItem item={item} />
 
     const confirmCart = () => {
-        triggerPost({ total, cart, comida, user, fecha: new Date().toLocaleString('es-ES', opciones), localId })
+        const orden = {
+            cart,
+            comida,
+            fecha: new Date().toLocaleString('es-ES', opciones),
+            total,
+            user
+        }
+        //agregamos la orden a firebase
+        triggerPost({ ...orden, localId })
+        //agregamos la orden a redux
+        const updatedOrders = [...ordenes, { ...orden, id: Math.floor(Math.random() * 1000000) }];
+        dispatch(setOrders(updatedOrders));
+
         dispatch(clearCart())
+
     }
 
     const handleFoodChange = (meal) => {

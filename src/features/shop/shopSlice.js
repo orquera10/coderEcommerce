@@ -8,7 +8,7 @@ const initialState = {
     productsFilteredByCategory: [],
     categorySelected: null,
     productIdSelected: null,
-    ordenes: null
+    ordenes: []
 }
 
 export const shopSlice = createSlice({
@@ -29,6 +29,7 @@ export const shopSlice = createSlice({
         },
     },
 })
+
 
 export const { setCategorySelected, setProductIdSelected, setOrders } = shopSlice.actions
 

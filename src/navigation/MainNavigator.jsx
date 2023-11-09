@@ -5,14 +5,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import AuthStackNavigator from './AuthStackNavigator'
 import BottomTabNavigator from './BottomTabNavigator'
 import { fetchSession } from '../db'
-import { useGetProfileImageQuery, useGetProfileDataQuery } from '../services/shopApi'
+import { useGetProfileImageQuery, useGetProfileDataQuery, useGetOrderQuery } from '../services/shopApi'
+import { setOrders } from '../features/shop/shopSlice'
 
 const MainNavigator = () => {
     //const [user, setuser] = useState(null)
     const { user, localId } = useSelector(state => state.auth)
     const dispatch = useDispatch()
-    const imagaData =  useGetProfileImageQuery(localId)
+    const imagaData = useGetProfileImageQuery(localId)
     const profileData = useGetProfileDataQuery(localId)
+    const ordersData = useGetOrderQuery(localId)
 
     useEffect(() => {
         console.log('Main navigator data', imagaData.data)
@@ -22,11 +24,22 @@ const MainNavigator = () => {
     }, [imagaData.data])
 
     useEffect(() => {
-        console.log('profile data es',profileData.data);
+        console.log('profile data es', profileData.data);
         if (profileData.data) {
             dispatch(setProfileData(profileData.data))
         }
     }, [profileData.data])
+
+    useEffect(() => {
+
+        if (ordersData.data) {
+            const arrayDeOrdenes = Object.entries(ordersData.data).map(([key, order]) => {
+                return { id: key, ...order };
+            });
+            dispatch(setOrders(arrayDeOrdenes))
+            console.log('ARRAY orders es',arrayDeOrdenes);
+        }
+    }, [ordersData.data])
 
     useEffect(() => {
         ; (async () => {
