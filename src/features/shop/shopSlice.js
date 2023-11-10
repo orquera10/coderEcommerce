@@ -8,7 +8,8 @@ const initialState = {
     productsFilteredByCategory: [],
     categorySelected: null,
     productIdSelected: null,
-    ordenes: []
+    ordenes: [],
+    messagesGpt: [{ role: 'system', content: 'Eres un asistente, que se limita a nutricion, salud y alimentacion. Si te preguntan de otro tema responde que no podes brindar esa respuesta' }]
 }
 
 export const shopSlice = createSlice({
@@ -27,10 +28,16 @@ export const shopSlice = createSlice({
                 ordenes: action.payload,
             };
         },
+        setMessages: (state, action) => {
+            return {
+                ...state,
+                messagesGpt: action.payload,
+            };
+        },
     },
 })
 
 
-export const { setCategorySelected, setProductIdSelected, setOrders } = shopSlice.actions
+export const { setCategorySelected, setProductIdSelected, setOrders, setMessages } = shopSlice.actions
 
 export default shopSlice.reducer

@@ -37,33 +37,6 @@ export const cartSlice = createSlice({
                 total: state.total + action.payload.calorias,
                 updatedAt: new Date().toLocaleString(),
             }
-            // if (productRepeated) {
-            //     const itemsUpdated = state.items.map(item => {
-            //         if (item.id === action.payload.id) {
-            //             item.quantity += action.payload.quantity
-            //             return item
-            //         }
-            //         return item
-            //     })
-            //     const newtotal = itemsUpdated.reduce(
-            //         (acc, current) => (acc += current.calorias * current.quantity),
-            //         0
-            //     )
-            //     console.log('este es el tota', newtotal)
-            //     state.items = itemsUpdated;
-            //     state.total = newtotal;
-            //     state.updatedAt = new Date().toLocaleString();
-            // } else {
-            //     state.items.push(action.payload)
-            //     const new2total = state.items.reduce(
-            //         (acc, current) => (acc += current.calorias * current.quantity),
-            //         0
-            //     )
-
-            //     console.log('este es el total 2', new2total)
-            //     state.total = new2total;
-            //     state.updatedAt = new Date().toLocaleString();
-            // }
         },
         removeItem: (state, action) => {
             const itemIdToRemove = action.payload; // Supongo que action.payload es el ID del elemento a eliminar

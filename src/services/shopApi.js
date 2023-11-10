@@ -61,6 +61,19 @@ export const shopApi = createApi({
                 },
             }),
         }),
+        postMessage: builder.mutation({
+            query: ({ role, content, localId }) => ({
+                url: `messages/${localId}.json`,
+                method: 'POST',
+                body: {
+                    role,
+                    content
+                },
+            }),
+        }),
+        getMessages: builder.query({
+            query: localId => `messages/${localId}.json`,
+        }),
     }),
 })
 
@@ -74,4 +87,6 @@ export const {
     usePostProfileDataMutation,
     useGetProfileDataQuery,
     useGetOrderQuery,
+    usePostMessageMutation,
+    useGetMessagesQuery
 } = shopApi

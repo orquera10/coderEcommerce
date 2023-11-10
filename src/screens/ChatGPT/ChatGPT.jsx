@@ -5,6 +5,8 @@ import { Header } from '../../components'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { apiGPT } from '../../firebase'
 import { colors } from '../../constants/colors'
+import { useDispatch, useSelector } from 'react-redux'
+import { setMessages } from '../../features/shop/shopSlice'
 
 
 
@@ -12,12 +14,17 @@ const ChatGPTScreen = ({ navigation }) => {
     const [value, setValue] = useState('')
     const [respuesta, setRespuesta] = useState('')
     const [loading, setLoading] = useState(false);
-    const mensajes = [{ role: 'system', content: 'Eres un asistente, que se limita a nutricion, salud y alimentacion. Si te preguntan de otro tema responde que no podes brindar esa respuesta' }]
+
+    const { messagesGpt } = useSelector(state => state.shop)
+    const dispatch = useDispatch()
+
+    //const mensajes = [{ role: 'system', content: 'Eres un asistente, que se limita a nutricion, salud y alimentacion. Si te preguntan de otro tema responde que no podes brindar esa respuesta' }]
 
     const search = async () => {
         setLoading(true);
-        mensajes.push({ role: 'user', content: value });
-        console.log(mensajes);
+        // mensajes.push({ role: 'user', content: value });
+        const msjUsuario = [...messagesGpt, {role: 'user', content: value}]
+        console.log(msjUsuario);
 
 
         const response = await fetch(`https://api.openai.com/v1/chat/completions`, {
@@ -28,17 +35,19 @@ const ChatGPTScreen = ({ navigation }) => {
             },
             body: JSON.stringify({
                 model: 'gpt-3.5-turbo',
-                messages: mensajes,
+                messages: msjUsuario,
             })
         })
         const data = await response.json();
         setRespuesta(data.choices[0].message.content);
 
-        mensajes.push({ role: 'assistant', content: data.choices[0].message.content });
-
+        //mensajes.push({ role: 'assistant', content: data.choices[0].message.content });
+        const msjFinal = [...msjUsuario, { role: 'assistant', content: data.choices[0].message.content }]
+        dispatch(setMessages(msjFinal))
 
         console.log(data.choices[0].message.content);
-        console.log(mensajes);
+        console.log(msjFinal);
+        
         Keyboard.dismiss();
         clearInput();
         setLoading(false);

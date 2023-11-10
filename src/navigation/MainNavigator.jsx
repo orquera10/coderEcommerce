@@ -6,7 +6,7 @@ import AuthStackNavigator from './AuthStackNavigator'
 import BottomTabNavigator from './BottomTabNavigator'
 import { fetchSession } from '../db'
 import { useGetProfileImageQuery, useGetProfileDataQuery, useGetOrderQuery } from '../services/shopApi'
-import { setOrders } from '../features/shop/shopSlice'
+import { setMessages, setOrders } from '../features/shop/shopSlice'
 
 const MainNavigator = () => {
     //const [user, setuser] = useState(null)
@@ -15,6 +15,7 @@ const MainNavigator = () => {
     const imagaData = useGetProfileImageQuery(localId)
     const profileData = useGetProfileDataQuery(localId)
     const ordersData = useGetOrderQuery(localId)
+    const messagesData = useGetOrderQuery(localId)
 
     useEffect(() => {
         console.log('Main navigator data', imagaData.data)
@@ -40,6 +41,17 @@ const MainNavigator = () => {
             console.log('ARRAY orders es',arrayDeOrdenes);
         }
     }, [ordersData.data])
+
+    useEffect(() => {
+        console.log('profile data es', messagesData.data);
+        if (messagesData.data) {
+            const arrayDeMensajes = Object.entries(messagesData.data).map(([key, order]) => {
+                return { id: key, ...order };
+            });
+            dispatch(setMessages(arrayDeMensajes))
+            console.log('ARRAY messages es',arrayDeMensajes);
+        }
+    }, [messagesData.data])
 
     useEffect(() => {
         ; (async () => {
