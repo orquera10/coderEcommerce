@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import AuthStackNavigator from './AuthStackNavigator'
 import BottomTabNavigator from './BottomTabNavigator'
 import { fetchSession } from '../db'
-import { useGetProfileImageQuery, useGetProfileDataQuery, useGetOrderQuery } from '../services/shopApi'
+import { useGetProfileImageQuery, useGetProfileDataQuery, useGetOrderQuery, useGetMessagesQuery } from '../services/shopApi'
 import { setMessages, setOrders } from '../features/shop/shopSlice'
 
 const MainNavigator = () => {
@@ -15,10 +15,11 @@ const MainNavigator = () => {
     const imagaData = useGetProfileImageQuery(localId)
     const profileData = useGetProfileDataQuery(localId)
     const ordersData = useGetOrderQuery(localId)
-    const messagesData = useGetOrderQuery(localId)
+    const messagesData = useGetMessagesQuery(localId)
+    
 
     useEffect(() => {
-        console.log('Main navigator data', imagaData.data)
+        // console.log('Main navigator data', imagaData.data)
         if (imagaData.data) {
             dispatch(setCameraImage(imagaData.data.image))
         }
@@ -43,8 +44,9 @@ const MainNavigator = () => {
     }, [ordersData.data])
 
     useEffect(() => {
-        console.log('profile data es', messagesData.data);
+        
         if (messagesData.data) {
+            console.log('messages data es', messagesData.data);
             const arrayDeMensajes = Object.entries(messagesData.data).map(([key, order]) => {
                 return { id: key, ...order };
             });

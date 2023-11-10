@@ -7,6 +7,7 @@ import { apiGPT } from '../../firebase'
 import { colors } from '../../constants/colors'
 import { useDispatch, useSelector } from 'react-redux'
 import { setMessages } from '../../features/shop/shopSlice'
+import { usePostMessageMutation } from '../../services/shopApi'
 
 
 
@@ -15,16 +16,35 @@ const ChatGPTScreen = ({ navigation }) => {
     const [respuesta, setRespuesta] = useState('')
     const [loading, setLoading] = useState(false);
 
+    const { localId } = useSelector(state => state.auth)
     const { messagesGpt } = useSelector(state => state.shop)
     const dispatch = useDispatch()
+    const [triggerPost, result] = usePostMessageMutation()
 
     //const mensajes = [{ role: 'system', content: 'Eres un asistente, que se limita a nutricion, salud y alimentacion. Si te preguntan de otro tema responde que no podes brindar esa respuesta' }]
 
     const search = async () => {
         setLoading(true);
-        // mensajes.push({ role: 'user', content: value });
-        const msjUsuario = [...messagesGpt, {role: 'user', content: value}]
-        console.log(msjUsuario);
+
+        const msjUsuario = { role: 'user', content: value }
+
+        let nuevoArray
+        if (messagesGpt.length === 0) {
+            const msjSystem = { role: 'system', content: 'Eres un asistente, que se limita a nutricion, salud y alimentacion. Si te preguntan de otro tema responde que no podes brindar esa respuesta' } 
+            nuevoArray = [msjSystem]
+            //agregamos mensajes a firebase
+            triggerPost({ ...msjSystem, localId })
+        } else {
+            nuevoArray = messagesGpt.map(function (elemento) {
+                return { content: elemento.content, role: elemento.role };
+            });
+        }
+
+        const mensajesConsulta = [...nuevoArray, msjUsuario]
+        console.log('mesajeConsulta: ', mensajesConsulta);
+
+        //agregamos mensajes a firebase
+        triggerPost({ ...msjUsuario, localId })
 
 
         const response = await fetch(`https://api.openai.com/v1/chat/completions`, {
@@ -35,19 +55,23 @@ const ChatGPTScreen = ({ navigation }) => {
             },
             body: JSON.stringify({
                 model: 'gpt-3.5-turbo',
-                messages: msjUsuario,
+                messages: mensajesConsulta,
             })
         })
         const data = await response.json();
         setRespuesta(data.choices[0].message.content);
 
-        //mensajes.push({ role: 'assistant', content: data.choices[0].message.content });
-        const msjFinal = [...msjUsuario, { role: 'assistant', content: data.choices[0].message.content }]
-        dispatch(setMessages(msjFinal))
+        //agregamos mensajes a redux
+        const msjRespuesta = { role: 'assistant', content: data.choices[0].message.content }
+        const messagesNuevos = [...mensajesConsulta, msjRespuesta]
+        dispatch(setMessages(messagesNuevos))
+
+        //agregamos mensajes a firebase
+        triggerPost({ ...msjRespuesta, localId })
 
         console.log(data.choices[0].message.content);
-        console.log(msjFinal);
-        
+        console.log(messagesNuevos);
+
         Keyboard.dismiss();
         clearInput();
         setLoading(false);
@@ -60,7 +84,7 @@ const ChatGPTScreen = ({ navigation }) => {
     }
     return (
         <SafeAreaView style={styles.container}>
-            <Header title={'ChatGPT'} />
+            <Header title={'DietikIA'} />
             <View style={styles.barraBus}>
                 <TextInput
                     style={styles.input}

@@ -9,7 +9,7 @@ const initialState = {
     categorySelected: null,
     productIdSelected: null,
     ordenes: [],
-    messagesGpt: [{ role: 'system', content: 'Eres un asistente, que se limita a nutricion, salud y alimentacion. Si te preguntan de otro tema responde que no podes brindar esa respuesta' }]
+    messagesGpt: []
 }
 
 export const shopSlice = createSlice({
